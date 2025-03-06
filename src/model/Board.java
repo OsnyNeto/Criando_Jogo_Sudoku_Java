@@ -18,11 +18,10 @@ public class Board {
         this.spaces = spaces;
     }
 
-
-
     public List<List<Space>> getSpaces() {
         return spaces;
     }
+
     public Games_Status_Enum getStatusEnum(){
         if(spaces.stream().flatMap(Collection::stream).noneMatch(s -> !s.isFixed() && nonNull(s.getAtual()))){
             return NAO_INICIADO;
@@ -33,7 +32,7 @@ public class Board {
     }
 
     public boolean hasErros(){
-        if(getStatusEnum()==NAO_INICIADO){
+        if(getStatusEnum() == NAO_INICIADO){
             return false;
         }
         return spaces.stream().flatMap(Collection::stream).anyMatch(s -> nonNull(s.getAtual()) && !s.getAtual().equals(s.getExperado()));
@@ -63,6 +62,6 @@ public class Board {
     }
 
     public boolean gameIsFinalizado(){
-        return !hasErros() && getStatusEnum() == COMPLETO;
+        return !hasErros() && getStatusEnum().equals(COMPLETO);
     }
 }
